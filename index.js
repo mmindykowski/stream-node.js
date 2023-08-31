@@ -4,12 +4,16 @@ let readStream = fs.createReadStream("./data/text.txt", {
   highWaterMark: 16 * 1024,
 });
 
-readStream.on("data", function (chunk) {
-  console.log(`Wielkość chunka: ${chunk.length / 1024} KB`);
+let writeStream = fs.createWriteStream("./data/output.txt");
 
-  console.log(chunk);
-});
+// readStream.on("data", function (chunk) {
+//   console.log(`Wielkość chunka: ${chunk.length / 1024} KB`);
 
-readStream.on("end", function () {
-  console.log("Zakonczony stream");
-});
+//   console.log(chunk);
+// });
+
+// readStream.on("end", function () {
+//   console.log("Zakonczony stream");
+// });
+
+readStream.pipe(writeStream);
